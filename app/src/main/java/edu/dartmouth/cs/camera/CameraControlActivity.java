@@ -51,9 +51,12 @@ public class CameraControlActivity extends Activity {
 		if (savedInstanceState != null) {
 			mImageCaptureUri = savedInstanceState
 					.getParcelable(URI_INSTANCE_STATE_KEY);
+			if(mImageCaptureUri == null)
+				loadSnap();
 		}
-
-		loadSnap();
+		else {
+			loadSnap();
+		}
 	}
 
 	@Override
