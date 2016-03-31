@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -17,7 +18,10 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.soundcloud.android.crop.Crop;
@@ -205,4 +209,95 @@ public class CameraControlActivity extends Activity {
 		}
 	}
 
+	private void loadProfile() {
+		String mKey = getString(R.string.preference_name);
+		SharedPreferences mPrefs = getSharedPreferences(mKey, MODE_PRIVATE);
+
+		// Load Name
+		mKey = getString(R.string.preference_key_profile_name);
+		String mValue = mPrefs.getString(mKey, " ");
+		((EditText) findViewById(R.id.profileName)).setText(mValue);
+
+		// Load Email
+		mKey = getString(R.string.preference_key_profile_email);
+		mValue = mPrefs.getString(mKey, " ");
+		((EditText) findViewById(R.id.profileEmail)).setText(mValue);
+
+		// Load Phone
+		mKey = getString(R.string.preference_key_profile_phone);
+		mValue = mPrefs.getString(mKey, " ");
+		((EditText) findViewById(R.id.profilePhone)).setText(mValue);
+
+		// Load Class
+		mKey = getString(R.string.preference_key_profile_class);
+		mValue = mPrefs.getString(mKey, " ");
+		((EditText) findViewById(R.id.profileClass)).setText(mValue);
+
+		// Load Name
+		mKey = getString(R.string.preference_key_profile_major);
+		mValue = mPrefs.getString(mKey, " ");
+		((EditText) findViewById(R.id.profileMajor)).setText(mValue);
+
+		// Load Gender
+		mKey = getString(R.string.preference_key_profile_gender);
+		int mIntValue = mPrefs.getInt(mKey, -1);
+		// In case there isn't one saved before:
+		if (mIntValue >= 0) {
+			// Find the radio button that should be checked.
+			RadioButton radioBtn = (RadioButton) ((RadioGroup) findViewById(R.id.profileGender))
+					.getChildAt(mIntValue);
+			// Check the button.
+			radioBtn.setChecked(true);
+		}
+	}
+
+	private void saveProfile() {
+		// Getting the shared preferences editor
+
+		String mKey = getString(R.string.preference_name);
+		SharedPreferences mPrefs = getSharedPreferences(mKey, MODE_PRIVATE);
+
+		SharedPreferences.Editor mEditor = mPrefs.edit();
+		mEditor.clear();
+
+		//Add Name
+		mKey = getString(R.string.preference_key_profile_name);
+		String mNameValue = (String) ((EditText) findViewById(R.id.profileName))
+				.getText().toString();
+		mEditor.putString(mKey, mNameValue);
+
+		//Add Email
+		mKey = getString(R.string.preference_key_profile_email);
+		String mValue = (String) ((EditText) findViewById(R.id.profileEmail))
+				.getText().toString();
+		mEditor.putString(mKey, mValue);
+
+		//Add Phone
+		mKey = getString(R.string.preference_key_profile_phone);
+		mValue = (String) ((EditText) findViewById(R.id.profilePhone))
+				.getText().toString();
+		mEditor.putString(mKey, mValue);
+
+		//Add Gender
+		mKey = getString(R.string.preference_key_profile_gender);
+		RadioGroup mRadioGroup = (RadioGroup) findViewById(R.id.profileGender);
+		int mIntValue = mRadioGroup.indexOfChild(findViewById(mRadioGroup
+				.getCheckedRadioButtonId()));
+		mEditor.putInt(mKey, mIntValue);
+
+		//Add Class
+		mKey = getString(R.string.preference_key_profile_class);
+		mValue = (String) ((EditText) findViewById(R.id.profileClass))
+				.getText().toString();
+		mEditor.putString(mKey, mValue);
+
+		//Add Major
+		mKey = getString(R.string.preference_key_profile_major);
+		mValue = (String) ((EditText) findViewById(R.id.profileMajor))
+				.getText().toString();
+		mEditor.putString(mKey, mValue);
+
+		Toast.makeText(getApplicationContext(), "Saved Profile Of: " + mNameValue,
+				Toast.LENGTH_SHORT).show();
+	}
 }

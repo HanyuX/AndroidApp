@@ -20,4 +20,13 @@
         <item>Take picture from camera</item>
     </string-array>
 
+    <!-- SharedPreferences -->
+
+    <string name="preference_name">my_shared_preferences</string>
+    <string name="preference_key_profile_name">profile_name</string>
+    <string name="preference_key_profile_email">profile_email</string>
+    <string name="preference_key_profile_phone">profile_phone</string>
+    <string name="preference_key_profile_gender">profile_gender</string>
+    <string name="preference_key_profile_class">profile_class</string>
+    <string name="preference_key_profile_major">profile_major</string>
 </resources>
