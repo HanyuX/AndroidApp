@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -44,25 +45,31 @@ public class CameraControlActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Log.d("ccc", "3");
 		setContentView(R.layout.profile);
 		mImageView = (ImageView) findViewById(R.id.imageProfile);
 
 		if (savedInstanceState != null) {
 			mImageCaptureUri = savedInstanceState
 					.getParcelable(URI_INSTANCE_STATE_KEY);
-			if(mImageCaptureUri == null)
+			if(mImageCaptureUri == null) {
 				loadSnap();
+				loadProfile();
+			}
 		}
 		else {
 			loadSnap();
+			loadProfile();
 		}
+	}
+
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu_main, menu);
+		return true;
 	}
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		Log.d("ccc","4");
 		// Save the image capture uri before the activity goes into background
 		outState.putParcelable(URI_INSTANCE_STATE_KEY, mImageCaptureUri);
 	}
@@ -72,11 +79,16 @@ public class CameraControlActivity extends Activity {
 	public void onSaveClicked(View v) {
 		// Save picture
 		saveSnap();
-		// Making a "toast" informing the user the picture is saved.
-		Toast.makeText(getApplicationContext(),
-				getString(R.string.ui_profile_toast_save_text),
-				Toast.LENGTH_SHORT).show();
+		// Save Profile
+		saveProfile();
+
 		// Close the activity
+		finish();
+	}
+
+	public void onCancleClicked(View v) {
+		Toast.makeText(getApplicationContext(), "Cancled",
+				Toast.LENGTH_SHORT).show();
 		finish();
 	}
 
@@ -106,7 +118,6 @@ public class CameraControlActivity extends Activity {
 
 			// Delete temporary image taken by camera after crop.
 			if (isTakenFromCamera) {
-				Log.d("ccc", "2");
 				File f = new File(mImageCaptureUri.getPath());
 				if (f.exists())
 					f.delete();
@@ -216,30 +227,36 @@ public class CameraControlActivity extends Activity {
 		String mKey = getString(R.string.preference_name);
 		SharedPreferences mPrefs = getSharedPreferences(mKey, MODE_PRIVATE);
 
+		Log.d("ccc", "load");
 		// Load Name
 		mKey = getString(R.string.preference_key_profile_name);
 		String mValue = mPrefs.getString(mKey, " ");
-		((EditText) findViewById(R.id.profileName)).setText(mValue);
+		if(mValue != " ")
+			((EditText) findViewById(R.id.profileName)).setText(mValue);
 
 		// Load Email
 		mKey = getString(R.string.preference_key_profile_email);
 		mValue = mPrefs.getString(mKey, " ");
-		((EditText) findViewById(R.id.profileEmail)).setText(mValue);
+		if(mValue != " ")
+			((EditText) findViewById(R.id.profileEmail)).setText(mValue);
 
 		// Load Phone
 		mKey = getString(R.string.preference_key_profile_phone);
 		mValue = mPrefs.getString(mKey, " ");
-		((EditText) findViewById(R.id.profilePhone)).setText(mValue);
+		if(mValue != " ")
+			((EditText) findViewById(R.id.profilePhone)).setText(mValue);
 
 		// Load Class
 		mKey = getString(R.string.preference_key_profile_class);
 		mValue = mPrefs.getString(mKey, " ");
-		((EditText) findViewById(R.id.profileClass)).setText(mValue);
+		if(mValue != " ")
+			((EditText) findViewById(R.id.profileClass)).setText(mValue);
 
-		// Load Name
+		// Load Major
 		mKey = getString(R.string.preference_key_profile_major);
 		mValue = mPrefs.getString(mKey, " ");
-		((EditText) findViewById(R.id.profileMajor)).setText(mValue);
+		if(mValue != " ")
+			((EditText) findViewById(R.id.profileMajor)).setText(mValue);
 
 		// Load Gender
 		mKey = getString(R.string.preference_key_profile_gender);
@@ -299,6 +316,9 @@ public class CameraControlActivity extends Activity {
 		mValue = (String) ((EditText) findViewById(R.id.profileMajor))
 				.getText().toString();
 		mEditor.putString(mKey, mValue);
+
+		// Commit all the changes into the shared preference
+		mEditor.commit();
 
 		Toast.makeText(getApplicationContext(), "Saved Profile Of: " + mNameValue,
 				Toast.LENGTH_SHORT).show();

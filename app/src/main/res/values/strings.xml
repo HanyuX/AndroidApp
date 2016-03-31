@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Camera</string>
+    <string name="app_name">Profile</string>
 
     <!-- Change this to whatever the course website will be -->
     <string name="profile_photo_file_name">profile_photo.png</string>
     <string name="dialog_fragment_tag_photo_picker">dialog_fragment_photo_picker</string>
     <string name="ui_profile_toast_save_text">Profile saved</string>
     <string name="ui_profile_toast_cancel_text">Change canceled</string>
-    <string name="ui_button_save_title">Save</string>
-    <string name="ui_button_change_title">SnapNow</string>
     <string name="ui_settings_profile_title">User Profile</string>
     <string name="ui_settings_profile_summary">Names, Email, Class, etc</string>
     <string name="ui_profile_photo_title">Profile photo:</string>
@@ -29,4 +27,28 @@
     <string name="preference_key_profile_gender">profile_gender</string>
     <string name="preference_key_profile_class">profile_class</string>
     <string name="preference_key_profile_major">profile_major</string>
+
+    <!-- Weiqiang Liu-->
+    <string name="profile_name_title">Name</string>
+    <string name="profile_email_title">Email</string>
+    <string name="profile_phone_title">Phone</string>
+    <string name="profile_gender_title">Gender</string>
+    <string name="profile_class_title">Class</string>
+    <string name="profile_major_title">Major</string>
+
+
+    <string name="profile_name_hint">Your Name</string>
+    <string name="profile_email_hint">Your Email</string>
+    <string name="profile_phone_hint">Your Phone Number</string>
+    <string name="profile_class_hint">eg. 2012</string>
+    <string name="profile_major_hint">Your major</string>
+
+    <string name="profile_gender_female">Female</string>
+    <string name="profile_gender_male">Male</string>
+
+    <string name="profile_save_button">SAVE</string>
+    <string name="profile_cancel_button">CANCEL</string>
+    <string name="profile_change_button">CHANGE</string>
+
+    <string name="menu_settings">settings</string>
 </resources>
