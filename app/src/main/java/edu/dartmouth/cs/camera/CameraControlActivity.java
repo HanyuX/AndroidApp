@@ -51,6 +51,7 @@ public class CameraControlActivity extends Activity {
 		if (savedInstanceState != null) {
 			mImageCaptureUri = savedInstanceState
 					.getParcelable(URI_INSTANCE_STATE_KEY);
+			mImageView.setImageURI(mImageCaptureUri);
 			if(mImageCaptureUri == null) {
 				loadSnap();
 				loadProfile();
@@ -108,7 +109,6 @@ public class CameraControlActivity extends Activity {
 		switch (requestCode) {
 		case REQUEST_CODE_TAKE_FROM_CAMERA:
 			// Send image taken from camera for cropping
-			Log.d("ccc", "1");
 			beginCrop(mImageCaptureUri);
 			break;
 

@@ -13,7 +13,7 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <activity android:name="edu.dartmouth.cs.camera.CameraControlActivity" >
+        <activity android:name="edu.dartmouth.cs.camera.CameraControlActivity" android:configChanges="orientation|screenSize|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
