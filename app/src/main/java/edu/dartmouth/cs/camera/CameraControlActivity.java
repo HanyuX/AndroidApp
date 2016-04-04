@@ -88,7 +88,7 @@ public class CameraControlActivity extends Activity {
 	}
 
 	public void onCancleClicked(View v) {
-		Toast.makeText(getApplicationContext(), "Cancled",
+		Toast.makeText(getApplicationContext(), "Cancelled",
 				Toast.LENGTH_SHORT).show();
 		finish();
 	}
