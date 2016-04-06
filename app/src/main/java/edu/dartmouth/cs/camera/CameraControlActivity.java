@@ -34,6 +34,7 @@ public class CameraControlActivity extends Activity {
 
 	private static final String IMAGE_UNSPECIFIED = "image/*";
 	private static final String URI_INSTANCE_STATE_KEY = "saved_uri";
+	private int flag = 1;
 
 	private Uri mImageCaptureUri;
 	private ImageView mImageView;
@@ -208,7 +209,8 @@ public class CameraControlActivity extends Activity {
 	 * have to.
 	 *  **/
 	private void beginCrop(Uri source) {
-		Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped");
+		Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"+flag));
+		flag ^= 1;
 		Crop.of(source, destination).asSquare().start(this);
 	}
 
