@@ -1,10 +1,5 @@
 package edu.dartmouth.cs.camera;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.ActivityNotFoundException;
@@ -16,7 +11,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -27,7 +21,10 @@ import android.widget.Toast;
 
 import com.soundcloud.android.crop.Crop;
 
-import edu.dartmouth.cs.camera.R;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 // extra credit -- take from camera or gallery
 
 public class CameraControlActivity extends Activity {
@@ -211,7 +208,7 @@ public class CameraControlActivity extends Activity {
 	 * have to.
 	 *  **/
 	private void beginCrop(Uri source) {
-		Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped"));
+		Uri destination = Uri.fromFile(new File(getCacheDir(), "cropped");
 		Crop.of(source, destination).asSquare().start(this);
 	}
 
@@ -227,7 +224,6 @@ public class CameraControlActivity extends Activity {
 		String mKey = getString(R.string.preference_name);
 		SharedPreferences mPrefs = getSharedPreferences(mKey, MODE_PRIVATE);
 
-		Log.d("ccc", "load");
 		// Load Name
 		mKey = getString(R.string.preference_key_profile_name);
 		String mValue = mPrefs.getString(mKey, " ");
